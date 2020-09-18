@@ -217,6 +217,7 @@ export class HostedPluginSupport {
                 };
             }
         });
+        this.activateByEvent('onStartupFinished');
     }
 
     get plugins(): PluginMetadata[] {
