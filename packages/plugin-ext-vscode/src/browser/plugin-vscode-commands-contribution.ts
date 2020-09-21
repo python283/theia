@@ -55,7 +55,10 @@ import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
 import { TerminalFrontendContribution } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
 import { QuickOpenWorkspace } from '@theia/workspace/lib/browser/quick-open-workspace';
 import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { FileNavigatorCommands } from '@theia/navigator/lib/browser/navigator-contribution';
+import {
+    FileNavigatorCommands,
+    FILE_NAVIGATOR_TOGGLE_COMMAND_ID
+} from '@theia/navigator/lib/browser/navigator-contribution';
 import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from '@theia/navigator/lib/browser';
 import { SelectableTreeNode } from '@theia/core/lib/browser/tree/tree-selection';
 
@@ -583,7 +586,11 @@ export class PluginVscodeCommandsContribution implements CommandContribution {
                 if (!URI.isUri(resource)) {
                     return;
                 }
-                const navigator = await this.shell.revealWidget(FILE_NAVIGATOR_ID);
+                let navigator = await this.shell.revealWidget(FILE_NAVIGATOR_ID);
+                if (!navigator) {
+                    await this.commandService.executeCommand(FILE_NAVIGATOR_TOGGLE_COMMAND_ID);
+                    navigator = await this.shell.revealWidget(FILE_NAVIGATOR_ID);
+                }
                 if (navigator instanceof FileNavigatorWidget) {
                     const model = navigator.model;
                     const node = await model.revealFile(new TheiaURI(resource));
