@@ -217,7 +217,7 @@ export class HostedPluginSupport {
                 };
             }
         });
-        this.activateByEvent('onStartupFinished');
+        this.appState.reachedState('ready').then(() => this.activateByEvent('onStartupFinished'));
     }
 
     get plugins(): PluginMetadata[] {
