@@ -147,7 +147,7 @@ export class ShellLayoutRestorer implements CommandContribution {
     storeLayout(app: FrontendApplication): void {
         if (this.shouldStoreLayout) {
             try {
-                this.logger.info('>>> Storing the layout...');
+                this.logger.info('>>> Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...Storing the layout...');
                 const layoutData = app.shell.getLayoutData();
                 const serializedLayoutData = this.deflate(layoutData);
                 this.storageService.setData(this.storageKey, serializedLayoutData);
@@ -160,7 +160,7 @@ export class ShellLayoutRestorer implements CommandContribution {
     }
 
     async restoreLayout(app: FrontendApplication): Promise<boolean> {
-        this.logger.info('>>> Restoring the layout state...');
+        this.logger.info('>>> Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state... Restoring the layout state...');
         const serializedLayoutData = await this.storageService.getData<string>(this.storageKey);
         if (serializedLayoutData === undefined) {
             this.logger.info('<<< Nothing to restore.');
